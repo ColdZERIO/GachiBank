@@ -29,6 +29,15 @@ func (d Database) GetUserAuth(login, password string) (*models.UserAuthDB, error
 	}
 
 	err := d.UsersAuth.FindOne(context.TODO(), filter).Decode(&User)
+	if err == mongo.ErrNoDocuments {
+		// Создаем нового пользователя если его нет в БД (этот кусок пропадет когда появится регистрация)
+		User = models.UserAuthDB{
+			Login:    login,
+			Password: password,
+		}
+		_, err = d.UsersAuth.InsertOne(context.TODO(), User)
+		return &User, err
+	}
 	return &User, err
 }
 

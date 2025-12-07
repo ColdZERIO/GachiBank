@@ -21,6 +21,7 @@ func main() {
 	defer db.Client.Disconnect(context.Background())
 
 	router := chi.NewRouter()
+	authorization.Init(db)
 
 	router.Get("/auth", authorization.GetAuth)
 	router.Post("/auth", authorization.UserRegister)

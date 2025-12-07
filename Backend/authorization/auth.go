@@ -11,16 +11,13 @@ type UserAuth struct {
 	Password string `json:"password"`
 }
 
-// type Auth struct {
-// 	database *database.Database
-// }
+// Вынес как глобальную переменную для будующего обращения и для иницилизации в мейне (а так по-любому нужны структуры)
+var db *database.Database
 
-// func (a Auth) CheckUserAuth(login, password string) (models.UserAuthDB, error) {
-// 	userCheck, err := a.database.GetUserAuth(login, password)
-// 	if err != nil {
-// 		return models.UserAuthDB, err
-// 	}
-// }
+// Иницилизация БД для мейна
+func Init(dbInstance *database.Database) {
+	db = dbInstance
+}
 
 func UserRegister(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -36,25 +33,28 @@ func UserRegister(w http.ResponseWriter, r *http.Request) {
 	err := json.NewDecoder(r.Body).Decode(&User)
 	if err != nil {
 		http.Error(w, "pars failed", http.StatusBadRequest)
+		return
 	}
 
 	if len(User.Login) < 2 && User.Login == "" {
 		http.Error(w, "invalid user name", http.StatusBadRequest)
+		return
 	}
 
 	if len(User.Password) < 6 && User.Password == "" {
 		http.Error(w, "invalid password", http.StatusBadRequest)
+		return
 	}
 
-	var data *database.Database
-
-	dataDB, err := data.GetUserAuth(User.Login, User.Password)
+	dataDB, err := db.GetUserAuth(User.Login, User.Password)
 	if err != nil {
 		http.Error(w, "user not found", http.StatusNotFound)
+		return
 	}
 
 	if dataDB == nil {
 		http.Error(w, "user not found in DB", http.StatusNotFound)
+		return
 	}
 
 	reqDB := map[string]string{
@@ -66,5 +66,5 @@ func UserRegister(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAuth(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "../index.html")
+	http.ServeFile(w, r, "./index.html")
 }

@@ -1,18 +1,18 @@
 const API_URL = 'http://localhost:8080/'
 
-async function login() {
+async function loginUser() {
     const userLogin = {
-        username: document.getElementById('username').value,
+        login: document.getElementById('login').value,
         password: document.getElementById('password').value
     };
     
-    if (!username || !password) {
+    if (!login || !password) {
         alert('Заполните все поля');
         return;
     }
     
     try {
-        const zapros = await fetch(`${API_URL}`, {
+        const zapros = await fetch(`${API_URL}auth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ async function login() {
         const data = await zapros.json();
 
         if (zapros.ok) {
-            document.getElementById('username').value = '';
+            document.getElementById('login').value = '';
             document.getElementById('password').value = '';
             console.log('Все отлично')
         }
@@ -31,9 +31,9 @@ async function login() {
         console.error('Ошибка:', error);
     }
     
-    console.log('Вход', { username, password });
+    console.log('Вход', { login, password });
     
-    alert(`Попытка входа для пользователя: ${username}`);
+    alert(`Попытка входа для пользователя: ${login}`);
 }
 
 function goToRegister() {
