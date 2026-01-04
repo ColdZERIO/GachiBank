@@ -2,6 +2,7 @@ package main
 
 import (
 	"gachibank/Backend/handlers"
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -9,7 +10,11 @@ import (
 )
 
 func main() {
-	godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 
 	router := chi.NewRouter()
 
@@ -18,5 +23,9 @@ func main() {
 
 	router.Handle("/*", http.FileServer(http.Dir("./")))
 
-	http.ListenAndServe(":8080", router)
+	err = http.ListenAndServe(":8080", router)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
 }

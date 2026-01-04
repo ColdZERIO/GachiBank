@@ -24,7 +24,7 @@ func FrontAuthHandler(w http.ResponseWriter, r *http.Request) {
 		<!-- Login -->
         <label for="loginField">Login:</label>
         <input 
-            type="login" 
+            type="login"
             id="loginField" 
             name="login"
             required
