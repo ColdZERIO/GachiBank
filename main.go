@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
 )
 
@@ -16,14 +15,12 @@ func main() {
 		return
 	}
 
-	router := chi.NewRouter()
+	http.HandleFunc("/reg", handlers.FrontRegHandler)
+	http.HandleFunc("/reg/success", handlers.RegistrationHandler)
+	http.HandleFunc("/auth", handlers.FrontAuthHandler)
+	http.HandleFunc("/auth/success", handlers.AuthHandler)
 
-	router.Post("/auth", handlers.AuthHandler)
-	router.Post("/reg", handlers.RegistrationHandler)
-
-	router.Handle("/*", http.FileServer(http.Dir("./")))
-
-	err = http.ListenAndServe(":8080", router)
+	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 		return

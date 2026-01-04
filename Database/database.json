@@ -1,0 +1,14 @@
+{
+	"base": [
+		{
+			"login": "arch111",
+			"name": "archil",
+			"password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+			"email": "forza.arch@yandex.ru",
+			"birthday": "1999-03-07",
+			"age": 26,
+			"subject": "math",
+			"date": "2026-01-04 20:01"
+		}
+	]
+}
