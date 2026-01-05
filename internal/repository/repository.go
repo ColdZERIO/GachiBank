@@ -2,8 +2,7 @@ package repository
 
 import (
 	"database/sql"
-
-	"github.com/TifaLuv/GolangServer/domain"
+	"gachibank/domain"
 )
 
 type Authorization interface {

@@ -2,9 +2,8 @@ package repository
 
 import (
 	"database/sql"
+	"gachibank/internal/models"
 	"log"
-
-	"github.com/TifaLuv/GolangServer/domain"
 )
 
 type AuthSQL struct {
@@ -15,7 +14,7 @@ func NewAuthSQL(db *sql.DB) *AuthSQL {
 	return &AuthSQL{db: db}
 }
 
-func (r *AuthSQL) CreateUser(user domain.User) (int, error) {
+func (r *AuthSQL) CreateUser(user models.User) (int, error) {
 	res, err := r.db.Exec("INSERT INTO users (name, username, password) VALUES (:name, :username, :password)",
 		sql.Named("name", user.Name),
 		sql.Named("username", user.Username),

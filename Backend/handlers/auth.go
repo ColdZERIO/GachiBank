@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"gachibank/Backend/models"
+	"gachibank/internal/models"
 	"io"
 	"log"
 	"net/http"

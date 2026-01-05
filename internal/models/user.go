@@ -1,6 +1,6 @@
-package domain
+package models
 
-type User struct {
+type User_temp struct {
 	ID       int    `json:"-"`
 	Name     string `json:"name" binding:"required"`     // на binding не обращай внимание это валадация у gin
 	Username string `json:"username" binding:"required"` // есть стандратная библиотека validation и вместо "binding" пишется "validation"

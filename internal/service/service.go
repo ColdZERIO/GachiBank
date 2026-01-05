@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/TifaLuv/GolangServer/domain"
-	"github.com/TifaLuv/GolangServer/internal/repository"
+	"gachibank/domain"
+	"gachibank/internal/repository"
 )
 
 type Authorization interface {

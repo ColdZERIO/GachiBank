@@ -1,4 +1,4 @@
-package domain
+package models
 
 type TodoList struct {
 	ID          int    `json:"id"`

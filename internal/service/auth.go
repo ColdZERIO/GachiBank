@@ -3,9 +3,8 @@ package service
 import (
 	"crypto/sha256"
 	"encoding/hex"
-
-	"github.com/TifaLuv/GolangServer/domain"
-	"github.com/TifaLuv/GolangServer/internal/repository"
+	"gachibank/domain"
+	"gachibank/internal/repository"
 )
 
 type AuthService struct {

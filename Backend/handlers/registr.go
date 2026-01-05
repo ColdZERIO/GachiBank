@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"fmt"
-	"gachibank/Backend/models"
+	"gachibank/internal/models"
 	"net/http"
 	"strings"
 	"time"
